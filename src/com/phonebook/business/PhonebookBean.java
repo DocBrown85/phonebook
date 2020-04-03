@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import com.phonebook.data.Contact;
 
 @Stateless
-public class PhonebookBean {
+public class PhonebookBean implements PhonebookLocal, PhonebookRemote {
 	
 	@PersistenceContext(unitName="phonebookPersistence")
 	EntityManager entityManager;
