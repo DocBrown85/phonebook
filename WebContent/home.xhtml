@@ -9,5 +9,55 @@
 </h:head>
 <h:body>
 	<h1>Welcome to the Phonebook!</h1>
+	
+	<ui:dataTable id="contactsTable" value="#{phonebook.contactsList}" var="element">
+		<ui:column>
+			<c:facet name="header">
+				<h:outputText value="Firstname"></h:outputText>
+			</c:facet>
+			<h:outputText value="#{element.firstname}"></h:outputText>
+		</ui:column>
+		<ui:column>
+			<c:facet name="header">
+				<h:outputText value="Lastname"></h:outputText>
+			</c:facet>
+			<h:outputText value="#{element.lastname}"></h:outputText>
+		</ui:column>
+		<ui:column>
+			<c:facet name="header">
+				<h:outputText value="Phone"></h:outputText>
+			</c:facet>
+			<h:outputText value="#{element.phone}"></h:outputText>
+		</ui:column>
+		<ui:column>
+			<c:facet name="header">
+				<h:outputText value="Email"></h:outputText>
+			</c:facet>
+			<h:outputText value="#{element.email}"></h:outputText>
+		</ui:column>
+	</ui:dataTable>
+	
+	<h:form>
+		<ui:dialog widgetVar="insert" width="400" height="500" modal="true">
+			<ui:panel>
+				<ui:panelGrid columns="3">
+					<h:outputText value="Firstname"></h:outputText>
+					<ui:inputText id="firstname" value="#{phonebook.contact.firstname}" required="true" requiredMessage="Mandatory Field!"></ui:inputText>
+					<ui:message for="firstname"></ui:message>
+					<h:outputText value="Lastname"></h:outputText>
+					<ui:inputText id="lastname" value="#{phonebook.contact.lastname}" required="true" requiredMessage="Mandatory Field!"></ui:inputText>
+					<ui:message for="lastname"></ui:message>
+					<h:outputText value="Phone"></h:outputText>
+					<ui:inputText id="phone" value="#{phonebook.contact.phone}" required="true" requiredMessage="Mandatory Field!"></ui:inputText>
+					<ui:message for="phone"></ui:message>
+					<h:outputText value="Email"></h:outputText>
+					<ui:inputText value="#{phonebook.contact.email}"></ui:inputText>
+				</ui:panelGrid>
+				<ui:commandButton actionListener="#{phonebook.save}" onclick="PF('insert').hide();" value="Save" update=":contactsTable"></ui:commandButton>
+			</ui:panel>
+		</ui:dialog>
+		<ui:commandButton type="button" onclick="PF('insert').show();" value="Add Contact">
+		</ui:commandButton>
+	</h:form>
 </h:body>
 </html>
